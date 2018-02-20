@@ -51,5 +51,7 @@ release:
 		done \
 	done
 	@echo
+	@echo "[release] generating sha256sums"
+	@find bin -type f -print0 | xargs -0 sha256sum > bin/sha256sums.txt
 	@echo "[release] uploading binaries to GitHub. Tag: v${VERSION}"
 	@go run scripts/upload_binaries.go bin ${VERSION}

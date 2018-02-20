@@ -9,6 +9,7 @@ import (
 	"context"
 	"github.com/google/go-github/github"
 	"log"
+	"sync"
 )
 
 const (
@@ -36,22 +37,30 @@ func main() {
 		log.Fatal(err)
 	}
 
+	if err = os.Chdir(binDir); err != nil {
+		log.Fatal(err)
+	}
+
+	var wg sync.WaitGroup
 	for _, bin := range bins {
+		wg.Add(1)
 		go func(bin os.FileInfo) {
-			fmt.Printf("publishing %v", bin.Name())
+			defer wg.Done()
+			fmt.Printf("publishing %v\n", bin.Name())
 			f, err := os.Open(bin.Name())
 			if err != nil {
-				fmt.Fprint(os.Stderr, err)
+				fmt.Fprintln(os.Stderr, err)
 				return
 			}
 
 			if err = publishBin(ghClient, owner, repo, releaseID, f); err != nil {
-				fmt.Fprint(os.Stderr, err)
+				fmt.Fprintln(os.Stderr, err)
 				return
 			}
 		}(bin)
 	}
 
+	wg.Wait()
 }
 
 func releaseID(client *github.Client, owner, repo, tag string) (int64, error) {

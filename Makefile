@@ -1,5 +1,5 @@
 TARGET := licy
-VERSION := 0.0.1
+VERSION := 0.0.2
 COMMIT := $(shell git rev-parse --short HEAD)
 BUILD_DATE := $(shell date -u '+%Y-%m-%d_%H:%M:%S')
 SHELL := /usr/bin/env bash

@@ -10,7 +10,7 @@ import (
 
 var (
 	Name      = "licy"
-	Version   = "dev"
+	Version   = "0.0.2-dev"
 	Commit    = "head"
 	BuildDate = "now"
 	commands  []cli.Command
@@ -19,7 +19,7 @@ var (
 func main() {
 	app := cli.NewApp()
 	app.Name = Name
-	app.Version = fmt.Sprintf("\nversion:\tv%s\nbuild date:\t%s\ngit hash:\t%s", Version, BuildDate, Commit)
+	app.Version = fmt.Sprintf("\nversion:\t%s\nbuild date:\t%s\ngit hash:\t%s", Version, BuildDate, Commit)
 	app.Usage = "open source licensing tool"
 	app.Commands = commands
 	app.ErrWriter = os.Stderr

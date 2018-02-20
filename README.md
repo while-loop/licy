@@ -15,7 +15,7 @@ Installation
 $ go get github.com/while-loop/licy
 ```
 
-#### cURL
+#### wget
 ```bash
 $ wget -O $GOPATH/bin/licy https://github.com/while-loop/licy/releases/download/v0.0.2/licy-GOOS-GOARCH && chmod +x $GOPATH/bin/licy
 ```
